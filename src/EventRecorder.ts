@@ -106,17 +106,17 @@ export class EventRecorder {
       }
       if (!added) {
         counters[event.key].push({
+          count: 1,
           index: event.index,
           version: event.version,
           value: event.value,
-          count: 1,
         } as IToggleCounter);
       }
     }
     return {
-      startTime: start,
-      endTime: end,
       counters: counters,
+      endTime: end,
+      startTime: start,
     } as IAccess;
   }
 
@@ -131,8 +131,8 @@ export class EventRecorder {
     this.sendEventQueue = [];
 
     const eventRepos = [{
-      events: trackEvents,
       access: accessEvents.length === 0 ? null : this.prepareSendData(accessEvents),
+      events: trackEvents,
     }];
 
     getPlatform().httpRequest.post(this.eventsUrl, {

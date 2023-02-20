@@ -330,10 +330,10 @@ test("FeatureProbe fetch error trigger error event", (done) => {
   let fp = new FeatureProbe({
     remoteUrl: "http://error.error",
     clientSdkKey: "client-sdk-key1",
+    enableAutoReporting: false,
     user: new FPUser(),
     refreshInterval: 10000,
     timeoutInterval: 1000,
-    enableAutoReporting: false,
   });
 
   fp.on('error', () =>{
